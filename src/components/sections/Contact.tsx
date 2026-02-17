@@ -19,10 +19,10 @@ export function Contact() {
           Estou sempre aberto a novas oportunidades e projetos interessantes.
           Sinta-se à vontade para entrar em contato!
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
           <button
             onClick={openModal}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary/50 sm:w-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +45,7 @@ export function Contact() {
             variant="outline"
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full sm:w-auto"
           >
             LinkedIn
           </Button>
@@ -53,6 +54,7 @@ export function Contact() {
             variant="outline"
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full sm:w-auto"
           >
             GitHub
           </Button>
