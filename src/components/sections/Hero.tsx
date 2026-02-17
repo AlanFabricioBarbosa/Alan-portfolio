@@ -86,9 +86,9 @@ export function Hero() {
             design moderno e atenção aos detalhes.
           </p>
 
-          <div className="mt-12 flex flex-wrap gap-4">
-            <Button href="#experiencia">
-              <span className="flex items-center gap-2">
+          <div className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Button href="#experiencia" className="w-full sm:w-auto">
+              <span className="flex items-center justify-center gap-2">
                 Ver Experiência
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -106,13 +106,13 @@ export function Hero() {
                 </svg>
               </span>
             </Button>
-            <Button href="#contato" variant="outline">
+            <Button href="#contato" variant="outline" className="w-full sm:w-auto">
               Entrar em Contato
             </Button>
             <a
               href="/cv-alan-fabricio.pdf"
               download
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/50 sm:w-auto"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
