@@ -6,7 +6,8 @@ import { useState } from "react";
 const navLinks = [
   { href: "#sobre", label: "Sobre" },
   { href: "#habilidades", label: "Habilidades" },
-  { href: "#projetos", label: "Projetos" },
+  { href: "#experiencia", label: "Experiência" },
+  { href: "#formacao", label: "Formação" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -16,9 +17,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-xl font-bold tracking-tight text-foreground">
+        <a href="#" className="text-xl font-bold tracking-tight text-foreground">
           &lt;Alan /&gt;
-        </Link>
+        </a>
 
         {/* Desktop nav */}
         <nav className="hidden gap-8 md:flex">

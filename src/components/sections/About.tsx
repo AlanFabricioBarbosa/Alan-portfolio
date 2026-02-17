@@ -11,8 +11,8 @@ export function About() {
         <p className="text-lg leading-relaxed text-muted-foreground">
           Desenvolvedor em formação, com experiência prática em front-end na
           plataforma Fluig e sólida base em JavaScript, ReactJS, Python, Git e
-          fundamentos de desenvolvimento web. Atuo como estagiário front-end na
-          VFlows, construindo formulários dinâmicos, automatizações e
+          fundamentos de desenvolvimento web. Atuei como estagiário front-end na
+          VFlows, onde construí formulários dinâmicos, automatizações e
           integrações BPM.
         </p>
         <p className="text-lg leading-relaxed text-muted-foreground">

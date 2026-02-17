@@ -1,4 +1,9 @@
+"use client";
+
+import { useContactModal } from "@/components/ContactModalProvider";
+
 export function Footer() {
+  const { openModal } = useContactModal();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -9,7 +14,7 @@ export function Footer() {
         </p>
         <div className="flex gap-6">
           <a
-            href="https://github.com"
+            href="https://github.com/AlanFabricioBarbosa"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -17,19 +22,19 @@ export function Footer() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/alanfabriciodev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             LinkedIn
           </a>
-          <a
-            href="mailto:email@exemplo.com"
+          <button
+            onClick={openModal}
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Email
-          </a>
+          </button>
         </div>
       </div>
     </footer>
