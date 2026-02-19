@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { MentorshipCard } from "@/components/MentorshipCard";
 
 const education = [
   {
@@ -6,6 +7,38 @@ const education = [
     course: "Análise e Desenvolvimento de Sistemas",
     degree: "Curso Superior de Tecnologia (CST)",
     period: "Ago 2024 — Set 2027",
+  },
+];
+
+const mentorships = [
+  {
+    title: "Mentoria Técnica em Back-End",
+    platform: "Plataforma Impact",
+    mentor: "Rafael \"Fino\" Gottardi",
+    period: "Em andamento",
+    description:
+      "Formação Back-End do programa ONE (Alura) com 7 formações e 332 horas concluídas, complementada por mentoria técnica individual.",
+    topics: [
+      "Sistemas Operacionais",
+      "Terminal Avançado",
+      "Tipos de Programas (VM, compilados, scripts, interpretados)",
+      "Estruturas de Dados",
+      "Fundamentos de Código",
+      "Bancos de Dados (SQL e NoSQL)",
+      "Orientação a Objetos",
+      "Docker",
+    ],
+    visibleTopics: 3,
+  },
+  {
+    title: "Aulas de Inglês — Nível Intermediário",
+    platform: "Plataforma Impact",
+    mentor: "Renan Moura",
+    period: "Em andamento",
+    description:
+      "Aulas de inglês focadas no desenvolvimento da comunicação para o mercado de tecnologia.",
+    topics: [],
+    visibleTopics: 0,
   },
 ];
 
@@ -42,6 +75,7 @@ export function Education() {
       id="formacao"
       heading="Formação"
       subheading="Minha trajetória acadêmica e certificações"
+      className="bg-muted/30"
     >
       <div className="mx-auto max-w-4xl space-y-14">
         {/* Formação Acadêmica */}
@@ -68,6 +102,18 @@ export function Education() {
                   </p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mentorias e Formação Complementar */}
+        <div>
+          <h3 className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-primary">
+            Mentorias e Formação Complementar
+          </h3>
+          <div className="flex flex-wrap gap-4">
+            {mentorships.map((m) => (
+              <MentorshipCard key={m.title} mentorship={m} />
             ))}
           </div>
         </div>

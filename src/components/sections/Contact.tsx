@@ -12,7 +12,6 @@ export function Contact() {
       id="contato"
       heading="Contato"
       subheading="Vamos conversar sobre seu próximo projeto?"
-      className="bg-muted/30"
     >
       <div className="mx-auto max-w-xl text-center">
         <p className="text-lg leading-relaxed text-muted-foreground">
