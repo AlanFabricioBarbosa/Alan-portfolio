@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 const experiences = [
   {
@@ -30,8 +31,9 @@ export function Experience() {
     >
       <div className="mx-auto max-w-3xl">
         <div className="relative space-y-8 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-border sm:before:left-[9px]">
-          {experiences.map((exp) => (
-            <div key={exp.company} className="group relative pl-10 sm:pl-12">
+          {experiences.map((exp, i) => (
+            <AnimateOnScroll key={exp.company} delay={i * 150}>
+              <div className="group relative pl-10 sm:pl-12">
               {/* Timeline dot */}
               <div className="absolute left-0 top-1.5 flex h-4 w-4 items-center justify-center rounded-full border-2 border-primary bg-background transition-colors group-hover:bg-primary sm:h-5 sm:w-5">
                 <div className="h-1.5 w-1.5 rounded-full bg-primary transition-colors group-hover:bg-background sm:h-2 sm:w-2" />
@@ -62,7 +64,8 @@ export function Experience() {
                   ))}
                 </div>
               </div>
-            </div>
+              </div>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

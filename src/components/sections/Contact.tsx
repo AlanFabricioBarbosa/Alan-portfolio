@@ -33,6 +33,7 @@ export function Contact() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <rect width="20" height="16" x="2" y="4" rx="2" />
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -46,7 +47,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="w-full sm:w-auto"
           >
-            LinkedIn
+            LinkedIn<span className="sr-only"> (abre em nova aba)</span>
           </Button>
           <Button
             href="https://github.com/AlanFabricioBarbosa"
@@ -55,7 +56,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="w-full sm:w-auto"
           >
-            GitHub
+            GitHub<span className="sr-only"> (abre em nova aba)</span>
           </Button>
         </div>
       </div>

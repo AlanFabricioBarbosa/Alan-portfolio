@@ -22,7 +22,7 @@ export function MentorshipCard({ mentorship: m }: { mentorship: Mentorship }) {
   const hiddenCount = m.topics.length - m.visibleTopics;
 
   return (
-    <div className="group flex w-full flex-col rounded-xl border border-border bg-background p-5 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 sm:w-[calc(50%-0.5rem)]">
+    <div className="group flex w-full flex-col rounded-xl border border-border bg-background p-5 transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 sm:w-[calc(50%-0.5rem)]">
       <div className="min-w-0">
         <h4 className="text-sm font-semibold leading-snug group-hover:text-primary">
           {m.title}
@@ -50,6 +50,7 @@ export function MentorshipCard({ mentorship: m }: { mentorship: Mentorship }) {
           {hasMore && (
             <button
               onClick={() => setExpanded((prev) => !prev)}
+              aria-expanded={expanded}
               className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium text-primary transition-colors hover:bg-primary/20"
             >
               {expanded ? "Ver menos" : `+${hiddenCount} ver mais`}

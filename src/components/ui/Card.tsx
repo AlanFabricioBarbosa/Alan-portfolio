@@ -11,10 +11,11 @@ export function Card({ title, description, tags, href }: CardProps) {
   return (
     <Wrapper
       {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="group flex flex-col rounded-xl border border-border bg-background p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
+      className="group flex flex-col rounded-xl border border-border bg-background p-6 transition-[border-color,box-shadow] hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
     >
       <h3 className="text-lg font-semibold group-hover:text-primary">
         {title}
+        {href && <span className="sr-only"> (abre em nova aba)</span>}
       </h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
         {description}

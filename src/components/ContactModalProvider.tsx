@@ -5,9 +5,14 @@ import {
   useCallback,
   useContext,
   useState,
+  lazy,
+  Suspense,
   type ReactNode,
 } from "react";
-import { ContactModal } from "@/components/ContactModal";
+
+const ContactModal = lazy(() =>
+  import("@/components/ContactModal").then((m) => ({ default: m.ContactModal }))
+);
 
 type ContactModalContextType = {
   openModal: () => void;
@@ -30,7 +35,11 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
   return (
     <ContactModalContext.Provider value={{ openModal }}>
       {children}
-      <ContactModal open={open} onClose={closeModal} />
+      {open && (
+        <Suspense fallback={null}>
+          <ContactModal open={open} onClose={closeModal} />
+        </Suspense>
+      )}
     </ContactModalContext.Provider>
   );
 }

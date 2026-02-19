@@ -19,6 +19,7 @@ type ContactModalProps = {
 
 export function ContactModal({ open, onClose }: ContactModalProps) {
   const formRef = useRef<HTMLFormElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -39,12 +40,16 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
     };
   }, [open, onClose]);
 
-  // Reset status when modal opens
+  // Reset status when modal opens + auto-focus
   useEffect(() => {
     if (open) {
       setStatus("idle");
       setErrors({});
       setTouched({});
+      // Move focus into the modal
+      requestAnimationFrame(() => {
+        modalRef.current?.focus();
+      });
     }
   }, [open]);
 
@@ -131,15 +136,25 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contact-modal-title"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+    >
       {/* Backdrop */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-lg animate-in rounded-2xl border border-border bg-background p-6 shadow-2xl sm:p-8">
+      <div
+        ref={modalRef}
+        tabIndex={-1}
+        className="relative w-full max-w-lg animate-in rounded-2xl border border-border bg-background p-6 shadow-2xl focus:outline-none sm:p-8"
+      >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -147,9 +162,8 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
           aria-label="Fechar"
         >
           <svg
+            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -162,12 +176,12 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
           </svg>
         </button>
 
-        <h2 className="text-2xl font-bold">Enviar Mensagem</h2>
+        <h2 id="contact-modal-title" className="text-2xl font-bold">Enviar Mensagem</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Preencha os campos abaixo e sua mensagem chegará direto no meu email.
         </p>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form ref={formRef} onSubmit={handleSubmit} aria-label="Formulário de contato" className="mt-6 space-y-4">
           {/* Remetente */}
           <div>
             <label
@@ -185,6 +199,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               placeholder="Como deseja ser chamado"
               onBlur={handleBlur}
               onChange={handleChange}
+              aria-describedby={touched.from_name && errors.from_name ? "error-from_name" : undefined}
               className={`w-full rounded-lg border bg-muted/30 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 ${
                 touched.from_name && errors.from_name
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -192,7 +207,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               }`}
             />
             {touched.from_name && errors.from_name && (
-              <p className="mt-1 text-xs text-red-500">{errors.from_name}</p>
+              <p id="error-from_name" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.from_name}</p>
             )}
           </div>
 
@@ -211,6 +226,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               placeholder="seuemail@exemplo.com"
               onBlur={handleBlur}
               onChange={handleChange}
+              aria-describedby={touched.from_email && errors.from_email ? "error-from_email" : undefined}
               className={`w-full rounded-lg border bg-muted/30 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 ${
                 touched.from_email && errors.from_email
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -218,7 +234,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               }`}
             />
             {touched.from_email && errors.from_email && (
-              <p className="mt-1 text-xs text-red-500">{errors.from_email}</p>
+              <p id="error-from_email" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.from_email}</p>
             )}
           </div>
 
@@ -239,6 +255,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               placeholder="Sobre o que deseja conversar?"
               onBlur={handleBlur}
               onChange={handleChange}
+              aria-describedby={touched.subject && errors.subject ? "error-subject" : undefined}
               className={`w-full rounded-lg border bg-muted/30 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 ${
                 touched.subject && errors.subject
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -246,7 +263,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               }`}
             />
             {touched.subject && errors.subject && (
-              <p className="mt-1 text-xs text-red-500">{errors.subject}</p>
+              <p id="error-subject" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.subject}</p>
             )}
           </div>
 
@@ -267,6 +284,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               placeholder="Escreva sua mensagem..."
               onBlur={handleBlur}
               onChange={handleChange}
+              aria-describedby={touched.message && errors.message ? "error-message" : undefined}
               className={`w-full resize-none rounded-lg border bg-muted/30 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 ${
                 touched.message && errors.message
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -274,17 +292,16 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
               }`}
             />
             {touched.message && errors.message && (
-              <p className="mt-1 text-xs text-red-500">{errors.message}</p>
+              <p id="error-message" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.message}</p>
             )}
           </div>
 
           {/* Status messages */}
           {status === "success" && (
-            <div className="flex items-center gap-2 rounded-lg bg-green-500/10 px-4 py-3 text-sm font-medium text-green-600 dark:text-green-400">
+            <div role="alert" className="flex items-center gap-2 rounded-lg bg-green-500/10 px-4 py-3 text-sm font-medium text-green-600 dark:text-green-400">
               <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -299,11 +316,10 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
           )}
 
           {status === "error" && (
-            <div className="flex items-center gap-2 rounded-lg bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400">
+            <div role="alert" className="flex items-center gap-2 rounded-lg bg-red-500/10 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400">
               <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -328,6 +344,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
             {sending ? (
               <>
                 <svg
+                  aria-hidden="true"
                   className="h-4 w-4 animate-spin"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -352,6 +369,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
             ) : (
               <>
                 <svg
+                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"

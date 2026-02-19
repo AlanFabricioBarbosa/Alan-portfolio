@@ -19,7 +19,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            GitHub
+            GitHub<span className="sr-only"> (abre em nova aba)</span>
           </a>
           <a
             href="https://www.linkedin.com/in/alanfabriciodev/"
@@ -27,7 +27,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            LinkedIn
+            LinkedIn<span className="sr-only"> (abre em nova aba)</span>
           </a>
           <button
             onClick={openModal}
