@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 
-const roles = ["Programador", "Front-End", "Fluig TOTVS", "Back-End"];
+const roles = ["Front-End", "Fluig TOTVS", "Back-End"];
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
