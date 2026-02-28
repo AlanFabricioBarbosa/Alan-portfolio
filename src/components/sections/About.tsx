@@ -9,7 +9,7 @@ export function About() {
     >
       <div className="mx-auto max-w-3xl space-y-6 text-center">
         <p className="text-lg leading-relaxed text-muted-foreground">
-          Desenvolvedor em formação, com experiência prática em front-end na
+          Desenvolvedor com experiência prática em front-end na
           plataforma Fluig e sólida base em JavaScript, ReactJS, Python, Git e
           fundamentos de desenvolvimento web. Atuei como estagiário front-end na
           VFlows, onde construí formulários dinâmicos, automatizações e
