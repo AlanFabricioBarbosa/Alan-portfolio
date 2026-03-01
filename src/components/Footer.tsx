@@ -31,7 +31,7 @@ export function Footer() {
           </a>
           <button
             onClick={openModal}
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Email
           </button>
