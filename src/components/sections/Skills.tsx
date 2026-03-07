@@ -134,20 +134,7 @@ const skillCategories = [
           </svg>
         ),
       },
-      {
-        name: "GitLab",
-        icon: (
-          <svg viewBox="0 0 128 128" aria-hidden="true" className="h-8 w-8">
-            <path fill="#E24329" d="M64 119.2L87.6 46.5H40.4z" />
-            <path fill="#FC6D26" d="M64 119.2L40.4 46.5H3.2z" />
-            <path fill="#FCA326" d="M3.2 46.5l-2.9 9a4.1 4.1 0 001.5 4.6L64 119.2z" />
-            <path fill="#E24329" d="M3.2 46.5h37.2L25.1 1.6c-.7-2.2-3.8-2.2-4.5 0z" />
-            <path fill="#FC6D26" d="M64 119.2l23.6-72.7h37.2z" />
-            <path fill="#FCA326" d="M124.8 46.5l2.9 9a4.1 4.1 0 01-1.5 4.6L64 119.2z" />
-            <path fill="#E24329" d="M124.8 46.5H87.6l15.3-44.9c.7-2.2 3.8-2.2 4.5 0z" />
-          </svg>
-        ),
-      },
+
     ],
   },
 ];
