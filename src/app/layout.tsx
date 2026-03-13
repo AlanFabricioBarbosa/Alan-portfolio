@@ -20,7 +20,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alanfabricio.dev";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Alan | Portfolio",
+    default: "Alan | Portfólio",
     template: "%s — Alan",
   },
   description:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "React",
     "Next.js",
     "JavaScript",
-    "Portfolio",
+    "Portfólio",
     "Alan",
     "Fluig",
     "TypeScript",
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: siteUrl,
-    siteName: "Alan | Portfolio",
-    title: "Alan | Portfolio — Desenvolvedor Front-End",
+    siteName: "Alan | Portfólio",
+    title: "Alan | Portfólio — Desenvolvedor Front-End",
     description:
       "Desenvolvedor Front-End com experiência em React, Next.js, JavaScript e Fluig. Confira meus projetos, habilidades e trajetória.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alan | Portfolio — Desenvolvedor Front-End",
+    title: "Alan | Portfólio — Desenvolvedor Front-End",
     description:
       "Desenvolvedor Front-End com experiência em React, Next.js, JavaScript e Fluig.",
   },

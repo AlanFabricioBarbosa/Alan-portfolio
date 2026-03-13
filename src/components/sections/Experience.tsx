@@ -13,7 +13,18 @@ type MediaItem = {
   alt: string;
 };
 
-const experiences = [
+type ExperienceItem = {
+  role: string;
+  company: string;
+  type: string;
+  period: string;
+  description: string;
+  tags: string[];
+  media: MediaItem[];
+  recommendationLetter?: { src: string; alt: string };
+};
+
+const experiences: ExperienceItem[] = [
   {
     role: "Estagiário em Desenvolvimento Fluig",
     company: "VFlows",
@@ -26,7 +37,11 @@ const experiences = [
       { type: "image", src: "/experience_img/VFlows/1762822437583.jpeg", alt: "VFlows — Captura 1" },
       { type: "image", src: "/experience_img/VFlows/1762822529188.jpeg", alt: "VFlows — Captura 2" },
       { type: "pdf", src: "/experience_img/VFlows/Certificado Bootcamp - Alan Fabrício Barbosa da Silva [assinado].pdf", alt: "Certificado Bootcamp" },
-    ] as MediaItem[],
+    ],
+    recommendationLetter: {
+      src: "/experience_img/VFlows/Carta de recomendação Alan Fabrício [assinado].pdf",
+      alt: "Carta de Recomendação",
+    },
   },
   {
     role: "Voluntário — Apoio Técnico",
@@ -43,7 +58,7 @@ const experiences = [
       { type: "image", src: "/experience_img/PlataformaImpact/Captura de tela de 2026-03-10 01-57-52.png", alt: "Plataforma Impact — Captura 4" },
       { type: "image", src: "/experience_img/PlataformaImpact/Captura de tela de 2026-03-10 01-59-13.png", alt: "Plataforma Impact — Captura 5" },
       { type: "image", src: "/experience_img/PlataformaImpact/Captura de tela de 2026-03-10 02-04-13.png", alt: "Plataforma Impact — Captura 6" },
-    ] as MediaItem[],
+    ],
   },
 ];
 
@@ -135,20 +150,35 @@ export function Experience() {
                       ))}
                     </div>
 
-                    {/* Accordion toggle */}
-                    {hasMedia && (
-                      <button
-                        type="button"
-                        onClick={() => toggle(exp.company)}
-                        className="mt-4 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
-                        aria-expanded={isOpen}
-                      >
-                        <ImageIcon className="h-3 w-3" />
-                        <span>{isOpen ? "Ocultar mídia" : `Ver mídia (${exp.media.length})`}</span>
-                        <ChevronDown
-                          className={`h-3 w-3 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                        />
-                      </button>
+                    {/* Action Buttons */}
+                    {(hasMedia || exp.recommendationLetter) && (
+                      <div className="mt-4 flex flex-wrap items-center gap-3">
+                        {exp.recommendationLetter && (
+                          <button
+                            type="button"
+                            onClick={() => setPdfView({ src: exp.recommendationLetter!.src, title: exp.recommendationLetter!.alt })}
+                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+                          >
+                            <FileText className="h-3.5 w-3.5" />
+                            <span>Carta de Recomendação</span>
+                          </button>
+                        )}
+
+                        {hasMedia && (
+                          <button
+                            type="button"
+                            onClick={() => toggle(exp.company)}
+                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
+                            aria-expanded={isOpen}
+                          >
+                            <ImageIcon className="h-3 w-3" />
+                            <span>{isOpen ? "Ocultar mídia" : `Ver mídia (${exp.media.length})`}</span>
+                            <ChevronDown
+                              className={`h-3 w-3 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                            />
+                          </button>
+                        )}
+                      </div>
                     )}
 
                     {/* Expandable media section */}
