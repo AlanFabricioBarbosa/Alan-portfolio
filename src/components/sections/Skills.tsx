@@ -1,9 +1,12 @@
+"use client";
+
 import { Section } from "@/components/ui/Section";
 import { AnimateOnScroll } from "@/components/AnimateOnScroll";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const skillCategories = [
   {
-    title: "Front-End",
+    titleKey: "frontend" as const,
     skills: [
       {
         name: "HTML",
@@ -60,7 +63,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Estilização",
+    titleKey: "styling" as const,
     skills: [
       {
         name: "Tailwind CSS",
@@ -90,7 +93,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Back-End",
+    titleKey: "backend" as const,
     skills: [
       {
         name: "Python",
@@ -124,7 +127,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Versionamento",
+    titleKey: "versioning" as const,
     skills: [
       {
         name: "Git",
@@ -134,39 +137,47 @@ const skillCategories = [
           </svg>
         ),
       },
-
     ],
   },
 ];
 
 export function Skills() {
+  const { t } = useLanguage();
+
+  const categoryTitleMap: Record<string, string> = {
+    frontend: t.skills.categories.frontend,
+    styling: t.skills.categories.styling,
+    backend: t.skills.categories.backend,
+    versioning: t.skills.categories.versioning,
+  };
+
   const allSkills = skillCategories.flatMap((c) =>
-    c.skills.map((s) => ({ ...s, category: c.title }))
+    c.skills.map((s) => ({ ...s, category: categoryTitleMap[c.titleKey] }))
   );
 
   return (
     <Section
       id="habilidades"
-      heading="Habilidades"
-      subheading="Tecnologias e ferramentas que utilizo no dia a dia"
+      heading={t.skills.heading}
+      subheading={t.skills.subheading}
       className="bg-muted/30"
     >
       <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {allSkills.map((skill, i) => (
           <AnimateOnScroll key={skill.name} delay={i * 50}>
             <div
-              className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-xl border border-border bg-background px-4 py-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
+              className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border border-border/50 glass px-4 py-6 transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
             >
-              {/* Glow background on hover */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 opacity-0 transition-opacity duration-300 group-hover:from-primary/5 group-hover:via-transparent group-hover:to-primary/5 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-accent/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/5 group-hover:to-accent/5 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/0 via-accent/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/20 group-hover:via-accent/20 group-hover:to-primary/20 group-hover:opacity-100" style={{ zIndex: -1 }} />
 
-              <div className="relative transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_var(--primary)]">
+              <div className="relative transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_var(--glow)]">
                 {skill.icon}
               </div>
               <span className="relative text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                 {skill.name}
               </span>
-              <span className="relative text-[10px] uppercase tracking-wider text-muted-foreground/60 transition-colors duration-300 group-hover:text-primary/60">
+              <span className="relative text-[10px] uppercase tracking-wider text-muted-foreground/60 transition-colors duration-300 group-hover:text-primary/70">
                 {skill.category}
               </span>
             </div>

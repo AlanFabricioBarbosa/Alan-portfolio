@@ -1,23 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --muted: #f4f4f5;
-  --muted-foreground: #52525b;
-  --border: #e4e4e7;
+  --background: #fafafe;
+  --foreground: #141420;
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --accent: #8b5cf6;
+  --muted: #f0f0f8;
+  --muted-foreground: #64648a;
+  --border: #e2e2f0;
+  --glow: rgba(99, 102, 241, 0.35);
+  --gradient-start: #6366f1;
+  --gradient-mid: #8b5cf6;
+  --gradient-end: #a78bfa;
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --border: #27272a;
+  --background: #0a0a14;
+  --foreground: #f0f0ff;
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
+  --accent: #a78bfa;
+  --muted: #16162a;
+  --muted-foreground: #9898c0;
+  --border: #1e1e3a;
+  --glow: rgba(129, 140, 248, 0.3);
+  --gradient-start: #818cf8;
+  --gradient-mid: #a78bfa;
+  --gradient-end: #c4b5fd;
 }
 
 @theme inline {
@@ -25,15 +35,51 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-glow: var(--glow);
   --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Ambient mesh gradient — subtle animated background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  opacity: 0.4;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, var(--gradient-start), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, var(--gradient-mid), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 50% 50%, var(--gradient-end), transparent 70%);
+  animation: gradient-shift 15s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.dark body::before {
+  opacity: 0.15;
+}
+
+/* Noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.dark body::after {
+  opacity: 0.04;
 }
 
 /* Smooth scroll offset for fixed header */
@@ -54,7 +100,8 @@ section + section::before {
   transform: translateX(-50%);
   width: min(80%, 32rem);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+  opacity: 0.3;
 }
 
 /* Scrollbar customization */
@@ -81,6 +128,8 @@ section + section::before {
   scrollbar-width: thin;
   scrollbar-color: var(--muted-foreground) var(--background);
 }
+
+/* ===================== KEYFRAMES ===================== */
 
 /* Modal animation */
 @keyframes animate-in {
@@ -120,6 +169,100 @@ section + section::before {
   border-radius: 0.5rem;
 }
 
+/* Animated gradient shift for background mesh */
+@keyframes gradient-shift {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(-1deg);
+  }
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(4px) rotate(-1deg);
+  }
+}
+
+/* Glow pulse for badges and indicators */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px 2px var(--glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 6px var(--glow);
+  }
+}
+
+/* Gradient text animation */
+@keyframes gradient-text {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Button shine sweep */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+/* Subtle border glow rotation */
+@keyframes border-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===================== UTILITIES ===================== */
+
+/* Glassmorphism utility */
+.glass {
+  background: color-mix(in srgb, var(--background) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-text 4s ease-in-out infinite;
+}
+
+/* Glow shadow utility */
+.glow-shadow {
+  box-shadow: 0 0 20px -5px var(--glow);
+}
+
+.glow-shadow-sm {
+  box-shadow: 0 0 10px -3px var(--glow);
+}
+
 /* Page loading cover */
 #page-loader {
   position: fixed;
@@ -146,5 +289,9 @@ section + section::before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  body::before {
+    animation: none !important;
   }
 }

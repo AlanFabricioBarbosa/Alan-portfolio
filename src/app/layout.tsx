@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactModalProvider } from "@/components/ContactModalProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -67,7 +68,7 @@ export default function RootLayout({
     <html lang="pt-BR" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#6366f1" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <script
           dangerouslySetInnerHTML={{
@@ -83,11 +84,13 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         <ThemeProvider>
-          <ContactModalProvider>
-            <Header />
-            <main id="conteudo">{children}</main>
-            <Footer />
-          </ContactModalProvider>
+          <LanguageProvider>
+            <ContactModalProvider>
+              <Header />
+              <main id="conteudo">{children}</main>
+              <Footer />
+            </ContactModalProvider>
+          </LanguageProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
