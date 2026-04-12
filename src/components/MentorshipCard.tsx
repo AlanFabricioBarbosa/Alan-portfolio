@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import { TiltCard } from "@/components/TiltCard";
 
 type Mentorship = {
   title: string;
@@ -24,7 +25,7 @@ export function MentorshipCard({ mentorship: m }: { mentorship: Mentorship }) {
   const hiddenCount = m.topics.length - m.visibleTopics;
 
   return (
-    <div className="group flex w-full flex-col rounded-2xl border border-border/50 glass p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 sm:w-[calc(50%-0.5rem)]">
+    <TiltCard className="group flex w-full flex-col rounded-2xl border border-border/50 glass p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 sm:w-[calc(50%-0.5rem)]">
       <div className="min-w-0">
         <h4 className="text-sm font-semibold leading-snug transition-colors duration-300 group-hover:text-primary">
           {m.title}
@@ -60,6 +61,6 @@ export function MentorshipCard({ mentorship: m }: { mentorship: Mentorship }) {
           )}
         </div>
       )}
-    </div>
+    </TiltCard>
   );
 }

@@ -2,6 +2,7 @@
 
 import { Section } from "@/components/ui/Section";
 import { MentorshipCard } from "@/components/MentorshipCard";
+import { TiltCard } from "@/components/TiltCard";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export function Education() {
@@ -22,7 +23,7 @@ export function Education() {
           </h3>
           <div className="mx-auto max-w-2xl">
             {t.education.degrees.map((edu) => (
-              <div
+              <TiltCard
                 key={edu.institution}
                 className="group flex items-start rounded-2xl border border-border/50 glass p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5"
               >
@@ -38,7 +39,7 @@ export function Education() {
                     {edu.period}
                   </p>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -62,7 +63,7 @@ export function Education() {
           </h3>
           <div className="grid gap-4 sm:grid-cols-2">
             {t.education.certifications.map((cert) => (
-              <div
+              <TiltCard
                 key={cert.name}
                 className="group flex flex-col rounded-2xl border border-border/50 glass p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5"
               >
@@ -89,7 +90,7 @@ export function Education() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>

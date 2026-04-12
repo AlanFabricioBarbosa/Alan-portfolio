@@ -6,6 +6,7 @@ import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { PdfViewer } from "@/components/PdfViewer";
 import { ChevronDown, ImageIcon, FileText, ExternalLink } from "lucide-react";
+import { TiltCard } from "@/components/TiltCard";
 import { useLanguage } from "@/components/LanguageProvider";
 
 type MediaItem = {
@@ -107,7 +108,7 @@ export function Experience() {
                     <div className={`h-1.5 w-1.5 rounded-full bg-primary transition-colors group-hover:bg-background sm:h-2 sm:w-2 ${isCurrent ? "animate-pulse" : ""}`} />
                   </div>
 
-                  <div className="rounded-2xl border border-border/50 glass p-6 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary/5">
+                  <TiltCard className="rounded-2xl border border-border/50 glass p-6 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-primary/5" intensity={6}>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-gradient-to-r from-primary/10 to-accent/10 px-3 py-0.5 text-xs font-medium text-primary">
                         {exp.type}
@@ -216,7 +217,7 @@ export function Experience() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </TiltCard>
                 </div>
               </AnimateOnScroll>
             );

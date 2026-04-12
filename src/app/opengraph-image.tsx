@@ -44,7 +44,7 @@ export default async function Image() {
             style={{
               fontSize: 28,
               fontWeight: 500,
-              color: "#3b82f6",
+              color: "#a18072",
               letterSpacing: "4px",
               textTransform: "uppercase",
             }}

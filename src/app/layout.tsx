@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ContactModalProvider } from "@/components/ContactModalProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -68,7 +69,7 @@ export default function RootLayout({
     <html lang="pt-BR" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#6366f1" />
+        <meta name="theme-color" content="#78716c" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <script
           dangerouslySetInnerHTML={{
@@ -84,6 +85,7 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         <ThemeProvider>
+          <ScrollProgress />
           <LanguageProvider>
             <ContactModalProvider>
               <Header />

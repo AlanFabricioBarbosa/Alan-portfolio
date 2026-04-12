@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafe;
-  --foreground: #141420;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --accent: #8b5cf6;
-  --muted: #f0f0f8;
-  --muted-foreground: #64648a;
-  --border: #e2e2f0;
-  --glow: rgba(99, 102, 241, 0.35);
-  --gradient-start: #6366f1;
-  --gradient-mid: #8b5cf6;
-  --gradient-end: #a78bfa;
+  --background: #faf9f7;
+  --foreground: #1a1614;
+  --primary: #5c4f43;
+  --primary-hover: #44372d;
+  --accent: #8b6f5c;
+  --muted: #f3ede7;
+  --muted-foreground: #6b5e54;
+  --border: #e2d9cf;
+  --glow: rgba(139, 111, 92, 0.3);
+  --gradient-start: #5c4f43;
+  --gradient-mid: #8b6f5c;
+  --gradient-end: #b8956e;
 }
 
 .dark {
-  --background: #0a0a14;
-  --foreground: #f0f0ff;
-  --primary: #818cf8;
-  --primary-hover: #a5b4fc;
-  --accent: #a78bfa;
-  --muted: #16162a;
-  --muted-foreground: #9898c0;
-  --border: #1e1e3a;
-  --glow: rgba(129, 140, 248, 0.3);
-  --gradient-start: #818cf8;
-  --gradient-mid: #a78bfa;
-  --gradient-end: #c4b5fd;
+  --background: #0c0a09;
+  --foreground: #f5f2ef;
+  --primary: #c9b9a8;
+  --primary-hover: #ddd0c2;
+  --accent: #d4a876;
+  --muted: #1c1917;
+  --muted-foreground: #b0a396;
+  --border: #2e2825;
+  --glow: rgba(212, 168, 118, 0.25);
+  --gradient-start: #c9b9a8;
+  --gradient-mid: #d4a876;
+  --gradient-end: #e0bc8a;
 }
 
 @theme inline {
@@ -46,6 +46,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  font-size: 23px;
 }
 
 /* Ambient mesh gradient — subtle animated background */
@@ -88,11 +89,11 @@ body::after {
 }
 
 /* Soft gradient separator between sections */
-section + section {
+section+section {
   position: relative;
 }
 
-section + section::before {
+section+section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -137,6 +138,7 @@ section + section::before {
     opacity: 0;
     transform: scale(0.95) translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -152,18 +154,17 @@ section + section::before {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--muted) 25%,
-    var(--border) 50%,
-    var(--muted) 75%
-  );
+  background: linear-gradient(90deg,
+      var(--muted) 25%,
+      var(--border) 50%,
+      var(--muted) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 0.5rem;
@@ -174,9 +175,11 @@ section + section::before {
   0% {
     transform: scale(1) rotate(0deg);
   }
+
   50% {
     transform: scale(1.1) rotate(2deg);
   }
+
   100% {
     transform: scale(1) rotate(-1deg);
   }
@@ -184,12 +187,16 @@ section + section::before {
 
 /* Floating animation for decorative elements */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
+
   33% {
     transform: translateY(-8px) rotate(1deg);
   }
+
   66% {
     transform: translateY(4px) rotate(-1deg);
   }
@@ -197,9 +204,12 @@ section + section::before {
 
 /* Glow pulse for badges and indicators */
 @keyframes glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 8px 2px var(--glow);
   }
+
   50% {
     box-shadow: 0 0 20px 6px var(--glow);
   }
@@ -207,9 +217,12 @@ section + section::before {
 
 /* Gradient text animation */
 @keyframes gradient-text {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -220,6 +233,7 @@ section + section::before {
   0% {
     transform: translateX(-100%) skewX(-15deg);
   }
+
   100% {
     transform: translateX(200%) skewX(-15deg);
   }
@@ -227,12 +241,60 @@ section + section::before {
 
 /* Subtle border glow rotation */
 @keyframes border-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.5;
   }
+
   50% {
     opacity: 1;
   }
+}
+
+/* Text reveal (mask slide) for section headings */
+@keyframes text-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes text-reveal-line {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.text-reveal {
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+}
+
+.text-reveal.revealed {
+  animation: text-reveal 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.text-reveal-line {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.text-reveal-line.revealed {
+  animation: text-reveal-line 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.4s forwards;
 }
 
 /* ===================== UTILITIES ===================== */
@@ -282,6 +344,7 @@ section + section::before {
 
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

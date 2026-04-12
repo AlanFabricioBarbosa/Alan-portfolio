@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import { ParticleField } from "@/components/ParticleField";
 
 const roles = ["Front-End", "Fluig TOTVS", "Back-End"];
 
@@ -50,6 +51,7 @@ export function Hero() {
         <div className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary/20 to-accent/10 blur-3xl" style={{ animation: "float 8s ease-in-out infinite" }} />
         <div className="absolute -bottom-24 -right-24 h-[400px] w-[400px] rounded-full bg-gradient-to-tl from-accent/15 to-primary/5 blur-3xl" style={{ animation: "float 10s ease-in-out infinite reverse" }} />
         <div className="absolute left-1/2 top-1/3 h-[300px] w-[300px] rounded-full bg-gradient-to-r from-primary/[0.08] to-accent/[0.08] blur-3xl" style={{ animation: "float 12s ease-in-out infinite" }} />
+        <ParticleField count={35} />
       </div>
 
       {/* Dot grid pattern overlay */}

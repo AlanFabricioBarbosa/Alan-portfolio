@@ -2,6 +2,7 @@
 
 import { Section } from "@/components/ui/Section";
 import { AnimateOnScroll } from "@/components/AnimateOnScroll";
+import { TiltCard } from "@/components/TiltCard";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const skillCategories = [
@@ -164,8 +165,8 @@ export function Skills() {
     >
       <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {allSkills.map((skill, i) => (
-          <AnimateOnScroll key={skill.name} delay={i * 50}>
-            <div
+          <AnimateOnScroll key={skill.name} delay={i * 80}>
+            <TiltCard
               className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border border-border/50 glass px-4 py-6 transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
             >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-accent/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/5 group-hover:to-accent/5 group-hover:opacity-100" />
@@ -180,7 +181,7 @@ export function Skills() {
               <span className="relative text-[10px] uppercase tracking-wider text-muted-foreground/60 transition-colors duration-300 group-hover:text-primary/70">
                 {skill.category}
               </span>
-            </div>
+            </TiltCard>
           </AnimateOnScroll>
         ))}
       </div>
