@@ -91,6 +91,7 @@ export const translations: Record<Locale, Translations> = {
       viewMore: "ver mais",
       degrees: [{ institution: "Descomplica", course: "Análise e Desenvolvimento de Sistemas", degree: "Curso Superior de Tecnologia (CST)", period: "Ago 2024 — Set 2027" }],
       mentorships: [
+        { title: "T2 — Dev. Full Stack Jr.", platform: "+praTi & Codifica", mentor: "", period: "Em andamento", description: "Formação Full Stack com foco em desenvolvimento back-end com Java e Spring Boot, front-end com ReactJS e práticas de DevOps.", topics: ["Java", "Spring Boot", "ReactJS", "DevOps"], visibleTopics: 4 },
         { title: "Mentoria Técnica em Back-End", platform: "Plataforma Impact", mentor: 'Rafael "Fino" Gottardi', period: "Em andamento", description: "Formação Back-End do programa ONE (Alura) com 7 formações e 332 horas concluídas, complementada por mentoria técnica individual.", topics: ["Sistemas Operacionais", "Terminal Avançado", "Tipos de Programas (VM, compilados, scripts, interpretados)", "Estruturas de Dados", "Fundamentos de Código", "Bancos de Dados (SQL e NoSQL)", "Orientação a Objetos", "Docker"], visibleTopics: 3 },
         { title: "Aulas de Inglês — Nível Intermediário", platform: "Plataforma Impact", mentor: "Renan Moura", period: "Em andamento", description: "Aulas de inglês focadas no desenvolvimento da comunicação para o mercado de tecnologia.", topics: [], visibleTopics: 0 },
       ],
@@ -201,6 +202,7 @@ export const translations: Record<Locale, Translations> = {
       viewMore: "view more",
       degrees: [{ institution: "Descomplica", course: "Systems Analysis and Development", degree: "Technology Degree (CST)", period: "Aug 2024 — Sep 2027" }],
       mentorships: [
+        { title: "T2 — Dev. Full Stack Jr.", platform: "+praTi & Codifica", mentor: "", period: "Ongoing", description: "Full Stack training focused on back-end development with Java and Spring Boot, front-end with ReactJS and DevOps practices.", topics: ["Java", "Spring Boot", "ReactJS", "DevOps"], visibleTopics: 4 },
         { title: "Back-End Technical Mentorship", platform: "Plataforma Impact", mentor: 'Rafael "Fino" Gottardi', period: "Ongoing", description: "Back-End track from the ONE program (Alura) with 7 courses and 332 hours completed, complemented by individual technical mentorship.", topics: ["Operating Systems", "Advanced Terminal", "Program Types (VM, compiled, scripts, interpreted)", "Data Structures", "Code Fundamentals", "Databases (SQL & NoSQL)", "Object-Oriented Programming", "Docker"], visibleTopics: 3 },
         { title: "English Classes — Intermediate Level", platform: "Plataforma Impact", mentor: "Renan Moura", period: "Ongoing", description: "English classes focused on developing communication skills for the tech market.", topics: [], visibleTopics: 0 },
       ],

@@ -32,7 +32,7 @@ export function MentorshipCard({ mentorship: m }: { mentorship: Mentorship }) {
         </h4>
         <p className="mt-1 text-sm text-primary">{m.platform}</p>
         <p className="mt-0.5 text-xs text-muted-foreground">
-          {t.education.mentor}: {m.mentor} · {m.period}
+          {m.mentor ? `${t.education.mentor}: ${m.mentor} · ` : ""}{m.period}
         </p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           {m.description}
