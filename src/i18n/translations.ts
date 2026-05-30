@@ -9,7 +9,13 @@ export type Translations = {
   nav: { about: string; skills: string; experience: string; education: string; contact: string; lightTheme: string; darkTheme: string; lightThemeEmoji: string; darkThemeEmoji: string; openMenu: string; closeMenu: string; toggleTheme: string };
   hero: { availableBadge: string; greeting: string; description: string; viewExperience: string; getInTouch: string; downloadCV: string; profileAlt: string };
   about: { heading: string; subheading: string; p1_prefix: string; p1_frontend: string; p1_platform: string; p1_fluig: string; p1_base: string; p1_and: string; p1_vflows: string; p1_suffix: string; p2_prefix: string; p2_backend: string; p2_via: string; p2_impact: string; p2_suffix: string };
-  skills: { heading: string; subheading: string; categories: { frontend: string; styling: string; backend: string; versioning: string } };
+  skills: {
+    heading: string;
+    subheading: string;
+    allLabel: string;
+    hint: string;
+    categories: { frontend: string; styling: string; backend: string; versioning: string };
+  };
   experience: { heading: string; subheading: string; recommendationLetter: string; hideMedia: string; viewMedia: string; enlarge: string; clickToView: string; items: ExperienceItem[] };
   education: { heading: string; subheading: string; academicTitle: string; mentorshipTitle: string; certificationsTitle: string; issuedAt: string; mentor: string; viewLess: string; viewMore: string; degrees: DegreeItem[]; mentorships: MentorshipItem[]; certifications: CertItem[] };
   contact: { heading: string; subheading: string; description: string; sendEmail: string };
@@ -64,6 +70,8 @@ export const translations: Record<Locale, Translations> = {
     skills: {
       heading: "Habilidades",
       subheading: "Tecnologias e ferramentas que utilizo no dia a dia",
+  allLabel: "Todas",
+  hint: "Dica: passe o mouse para ver a categoria (ou use o filtro acima).",
       categories: { frontend: "Front-End", styling: "Estilização", backend: "Back-End", versioning: "Versionamento" },
     },
     experience: {
@@ -175,6 +183,8 @@ export const translations: Record<Locale, Translations> = {
     skills: {
       heading: "Skills",
       subheading: "Technologies and tools I use daily",
+  allLabel: "All",
+  hint: "Tip: hover to see the category (or use the filter above).",
       categories: { frontend: "Front-End", styling: "Styling", backend: "Back-End", versioning: "Version Control" },
     },
     experience: {

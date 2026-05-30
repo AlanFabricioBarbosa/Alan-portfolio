@@ -37,8 +37,11 @@ export function Hero() {
         40
       );
     } else if (deleting && displayed.length === 0) {
-      setDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
+      // Avoid calling setState synchronously inside the effect body
+      timeout = setTimeout(() => {
+        setDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }, 0);
     }
 
     return () => clearTimeout(timeout);

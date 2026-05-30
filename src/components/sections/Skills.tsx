@@ -2,8 +2,8 @@
 
 import { Section } from "@/components/ui/Section";
 import { AnimateOnScroll } from "@/components/AnimateOnScroll";
-import { TiltCard } from "@/components/TiltCard";
 import { useLanguage } from "@/components/LanguageProvider";
+import { useMemo, useState } from "react";
 
 const skillCategories = [
   {
@@ -145,16 +145,42 @@ const skillCategories = [
 export function Skills() {
   const { t } = useLanguage();
 
-  const categoryTitleMap: Record<string, string> = {
-    frontend: t.skills.categories.frontend,
-    styling: t.skills.categories.styling,
-    backend: t.skills.categories.backend,
-    versioning: t.skills.categories.versioning,
-  };
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  const allSkills = skillCategories.flatMap((c) =>
-    c.skills.map((s) => ({ ...s, category: categoryTitleMap[c.titleKey] }))
+  const categoryTitleMap = useMemo(
+    () => ({
+      frontend: t.skills.categories.frontend,
+      styling: t.skills.categories.styling,
+      backend: t.skills.categories.backend,
+      versioning: t.skills.categories.versioning,
+    }),
+    [t.skills.categories]
   );
+
+  const categories = useMemo(
+    () => [
+      { key: "all", label: t.skills.allLabel },
+      ...skillCategories.map((c) => ({ key: c.titleKey, label: categoryTitleMap[c.titleKey] })),
+    ],
+    [t.skills.allLabel, categoryTitleMap]
+  );
+
+  const allSkills = useMemo(
+    () =>
+      skillCategories.flatMap((c) =>
+        c.skills.map((s) => ({
+          ...s,
+          categoryKey: c.titleKey,
+          categoryLabel: categoryTitleMap[c.titleKey],
+        }))
+      ),
+    [categoryTitleMap]
+  );
+
+  const filteredSkills = useMemo(() => {
+    if (activeCategory === "all") return allSkills;
+    return allSkills.filter((s) => s.categoryKey === activeCategory);
+  }, [activeCategory, allSkills]);
 
   return (
     <Section
@@ -163,27 +189,47 @@ export function Skills() {
       subheading={t.skills.subheading}
       className="bg-muted/30"
     >
-      <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        {allSkills.map((skill, i) => (
-          <AnimateOnScroll key={skill.name} delay={i * 80}>
-            <TiltCard
-              className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border border-border/50 glass px-4 py-6 transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
-            >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-accent/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/5 group-hover:to-accent/5 group-hover:opacity-100" />
-              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/0 via-accent/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:from-primary/20 group-hover:via-accent/20 group-hover:to-primary/20 group-hover:opacity-100" style={{ zIndex: -1 }} />
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+          {categories.map((c) => {
+            const isActive = activeCategory === c.key;
 
-              <div className="relative transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_var(--glow)]">
-                {skill.icon}
+            return (
+              <button
+                key={c.key}
+                type="button"
+                onClick={() => setActiveCategory(c.key)}
+                className={
+                  "rounded-full border px-4 py-2 text-sm transition-colors " +
+                  (isActive
+                    ? "border-primary/40 bg-primary/10 text-foreground"
+                    : "border-border/60 bg-background/50 text-muted-foreground hover:border-primary/30 hover:text-foreground")
+                }
+              >
+                {c.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {filteredSkills.map((skill, i) => (
+            <AnimateOnScroll key={`${skill.categoryKey}-${skill.name}`} delay={i * 40}>
+              <div className="group relative">
+                <div
+                  className="flex items-center gap-3 rounded-xl border border-border/60 bg-background/40 px-3 py-3 backdrop-blur transition-colors hover:border-primary/30"
+                >
+                  <span className="shrink-0 opacity-90 transition-transform duration-300 group-hover:scale-105">
+                    {skill.icon}
+                  </span>
+                  <span className="min-w-0 truncate text-sm font-medium text-foreground/90">
+                    {skill.name}
+                  </span>
+                </div>
               </div>
-              <span className="relative text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                {skill.name}
-              </span>
-              <span className="relative text-[10px] uppercase tracking-wider text-muted-foreground/60 transition-colors duration-300 group-hover:text-primary/70">
-                {skill.category}
-              </span>
-            </TiltCard>
-          </AnimateOnScroll>
-        ))}
+            </AnimateOnScroll>
+          ))}
+        </div>
       </div>
     </Section>
   );
